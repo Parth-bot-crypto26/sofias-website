@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Star, Instagram } from 'lucide-react';
 import RevealOnScroll from '../components/RevealOnScroll';
@@ -25,6 +25,89 @@ const REVIEWS = [
 
 const ORDER_LINK = "https://www.google.com/viewer/chooseprovider?mid=/g/11sh1ghw6f&g2lbs=AO8LyOJS_ARPS1tP537wJKiB7d88CK0ZndHDlvOUzivyi0qjSWFkrd5Fsceap9bNuMYRM4pw35iVdG5fLnxRosSjHuq-SbDkztdFCGlIr5W6O_RF6KR52DE%3D&hl=en-IN&gl=in&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=dNMjacDpGoCSseMPp_uUwQo&ei=dNMjacDpGoCSseMPp_uUwQo&fo_s=OA&opi=79508299&ebb=1&cs=0&foub=mcpp";
 
+const TestimonialsCarousel = () => {
+  const trackRef = useRef(null);
+  const isDraggingRef = useRef(false);
+  const pointerStartRef = useRef(0);
+  const scrollStartRef = useRef(0);
+  const clonedReviews = [...REVIEWS, ...REVIEWS];
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    track.scrollLeft = track.scrollWidth / 4;
+
+    let frameId;
+    const step = () => {
+      if (!isDraggingRef.current) {
+        track.scrollLeft += 0.4;
+        const maxScroll = track.scrollWidth / 2;
+        if (track.scrollLeft >= maxScroll) {
+          track.scrollLeft -= maxScroll;
+        }
+      }
+      frameId = requestAnimationFrame(step);
+    };
+
+    frameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frameId);
+  }, []);
+
+  const handlePointerDown = (e) => {
+    if (!trackRef.current) return;
+    isDraggingRef.current = true;
+    pointerStartRef.current = e.clientX;
+    scrollStartRef.current = trackRef.current.scrollLeft;
+    trackRef.current.classList.add('cursor-grabbing');
+    trackRef.current.setPointerCapture?.(e.pointerId);
+  };
+
+  const handlePointerMove = (e) => {
+    if (!isDraggingRef.current || !trackRef.current) return;
+    e.preventDefault();
+    const currentX = e.clientX;
+    const delta = currentX - pointerStartRef.current;
+    trackRef.current.scrollLeft = scrollStartRef.current - delta;
+  };
+
+  const endDrag = (e) => {
+    if (!trackRef.current) return;
+    isDraggingRef.current = false;
+    trackRef.current.classList.remove('cursor-grabbing');
+    trackRef.current.releasePointerCapture?.(e.pointerId);
+  };
+
+  return (
+    <div className="relative">
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-stone-50 via-stone-50/80 to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-stone-50 via-stone-50/80 to-transparent z-10" />
+      <div
+        ref={trackRef}
+        className="flex gap-5 overflow-hidden select-none cursor-grab"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={endDrag}
+        onPointerLeave={endDrag}
+      >
+        {clonedReviews.map((review, i) => (
+          <div key={`${review.name}-${i}`} className="min-w-[260px] sm:min-w-[320px] md:min-w-[360px] bg-white p-6 sm:p-8 shadow-lg rounded-sm border border-stone-100 flex flex-col">
+            <div className="flex gap-1 mb-4 text-red-600">
+              {[...Array(review.rating)].map((_, j) => (
+                <Star key={j} fill="#dc2626" size={16} className="text-red-600" />
+              ))}
+            </div>
+            <p className="text-stone-700 leading-relaxed text-base mb-6 flex-grow font-light italic">"{review.text}"</p>
+            <div className="pt-4 border-t border-stone-100">
+              <span className="text-stone-900 font-semibold tracking-wide text-sm block text-right">— {review.name}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Home = () => (
   <>
     {/* Hero - Light Theme style (Bright overlay) */}
@@ -46,18 +129,18 @@ const Home = () => (
           </h1>
         </RevealOnScroll>
         <RevealOnScroll delay={400}>
-          <div className="flex flex-col md:flex-row gap-3 md:gap-4 justify-center items-stretch md:items-center w-full max-w-md mx-auto md:max-w-none">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-4 justify-center items-stretch md:items-center w-full max-w-[230px] sm:max-w-sm mx-auto md:max-w-none">
             <a
               href={ORDER_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-red-700 text-white px-8 sm:px-10 py-4 text-xs sm:text-sm md:text-sm tracking-[0.25em] md:tracking-widest uppercase hover:bg-red-800 transition-all w-full md:w-auto shadow-xl rounded-full md:rounded-none"
+              className="w-full md:w-auto rounded-none px-6 sm:px-8 md:px-10 py-3 md:py-4 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] md:tracking-widest bg-red-700 text-white shadow-[0_12px_30px_rgba(0,0,0,0.35)] md:shadow-xl border border-red-500/60 md:border-none hover:bg-red-600 transition-all"
             >
               Order Online
             </a>
             <Link
               to="/menu"
-              className="bg-white/90 md:bg-white text-stone-900 px-8 sm:px-10 py-4 text-xs sm:text-sm md:text-sm tracking-[0.25em] md:tracking-widest uppercase hover:bg-stone-200 transition-all w-full md:w-auto shadow-xl text-center border border-white/40 md:border-none rounded-full md:rounded-none"
+              className="w-full md:w-auto rounded-none px-6 sm:px-8 md:px-10 py-3 md:py-4 text-xs sm:text-sm font-semibold uppercase tracking-[0.15em] md:tracking-widest text-stone-900 bg-white/90 md:bg-white border border-white/60 md:border-none shadow-[0_8px_20px_rgba(0,0,0,0.25)] md:shadow-xl hover:bg-white hover:text-stone-900 md:hover:bg-stone-200 transition-all text-center"
             >
               View Menu
             </Link>
@@ -138,21 +221,7 @@ const Home = () => (
         </RevealOnScroll>
       </div>
 
-      <div className="flex animate-marquee-medium hover:[animation-play-state:paused] items-stretch gap-6">
-        {[...REVIEWS, ...REVIEWS].map((review, i) => (
-          <div key={i} className="flex-shrink-0 w-[360px] bg-white p-8 mx-2 shadow-lg rounded-lg border border-stone-100 flex flex-col">
-            <div className="flex gap-1 mb-5">
-              {[...Array(review.rating)].map((_, j) => (
-                <Star key={j} fill="#dc2626" size={16} className="text-red-600" />
-              ))}
-            </div>
-            <p className="text-stone-700 leading-relaxed text-base mb-6 flex-grow font-light italic">"{review.text}"</p>
-            <div className="pt-4 border-t border-stone-100">
-              <span className="text-stone-900 font-semibold tracking-wide text-sm block text-right">— {review.name}</span>
-            </div>
-          </div>
-        ))}
-      </div>
+      <TestimonialsCarousel />
     </section>
   </>
 );
