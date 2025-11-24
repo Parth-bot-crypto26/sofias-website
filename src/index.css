@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: #ffffff;
 }
 
 body {
-  background-color: #1c1917; /* match stone-900 */
+  background-color: #ffffff;
+  color: #1c1917;
 }
