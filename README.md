@@ -16,7 +16,7 @@ Sleek Digital Menu: An easily accessible and visually appealing menu layout.
 
 Auto-Scrolling Reviews: A dynamic section displaying customer testimonials.
 
-Fully Responsive: optimized layout that looks perfect on mobile, tablet, and desktop devices.
+Fully Responsive: optimized layout that looks perfect on mobile, tablet and desktop devices.
 
 ***🛠️ Technologies Used -***
 
