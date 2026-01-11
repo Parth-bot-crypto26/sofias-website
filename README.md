@@ -1,16 +1,56 @@
-# React + Vite
+🌮 Sofia's Antojitos Website
+A custom-built, immersive website designed to elevate the digital presence of Sofia's Antojitos. This project replaces static, outdated designs with a modern, responsive interface that reflects the restaurant's authentic atmosphere through high-end animations and a polished user experience.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Live Demo
+Check out the live website here: Live at: https://sofias-website.vercel.app/
 
-Currently, two official plugins are available:
+✨ Key Features
+Immersive UI/UX: A complete design overhaul focused on authenticity and modern aesthetics.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+High-End Animations: Custom animations recreated using React and Tailwind CSS for a premium feel.
 
-## React Compiler
+Sleek Digital Menu: An easily accessible and visually appealing menu layout.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Auto-Scrolling Reviews: A dynamic section displaying customer testimonials.
 
-## Expanding the ESLint configuration
+Fully Responsive: optimized layout that looks perfect on mobile, tablet, and desktop devices.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🛠️ Technologies Used
+Framework: React
+
+Language: JavaScript
+
+Styling: Tailwind CSS
+
+Build Tool: Vite
+
+🧠 Development Challenges
+During the development process, I encountered cross-version compatibility issues with Tailwind CSS. To resolve this:
+
+I successfully refactored the Tailwind configuration to ensure stability.
+
+Standardized the styling approach to maintain consistency across the application.
+
+💻 Getting Started
+To run this project locally on your machine, follow these steps:
+
+Clone the repository
+
+Bash
+
+git clone https://github.com/Parth-bot-crypto26/sofias-antojitos.git
+Navigate to the project directory
+
+Bash
+
+cd sofias-antojitos
+Install dependencies
+
+Bash
+
+npm install
+Start the development server
+
+Bash
+
+npm run dev
