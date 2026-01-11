@@ -1,12 +1,12 @@
-***🌮 Sofia's Antojitos Website***
+***🌮 Sofia's Antojitos Website -***
 
 A custom-built, immersive website designed to elevate the digital presence of Sofia's Antojitos. This project replaces static, outdated designs with a modern, responsive interface that reflects the restaurant's authentic atmosphere through high-end animations and a polished user experience.
 
-***🚀 Live Demo***
+***🚀 Live Demo -***
 
 Check out the live website here: Live at: https://sofias-website.vercel.app/
 
-***✨ Key Features***
+***✨ Key Features -***
 
 Immersive UI/UX: A complete design overhaul focused on authenticity and modern aesthetics.
 
@@ -18,7 +18,7 @@ Auto-Scrolling Reviews: A dynamic section displaying customer testimonials.
 
 Fully Responsive: optimized layout that looks perfect on mobile, tablet, and desktop devices.
 
-***🛠️ Technologies Used***
+***🛠️ Technologies Used -***
 
 Framework: React
 
@@ -28,7 +28,7 @@ Styling: Tailwind CSS
 
 Build Tool: Vite
 
-***🧠 Development Challenges***
+***🧠 Development Challenges -***
 
 During the development process, I encountered cross-version compatibility issues with Tailwind CSS. To resolve this:
 
@@ -36,7 +36,7 @@ I successfully refactored the Tailwind configuration to ensure stability.
 
 Standardized the styling approach to maintain consistency across the application.
 
-***💻 Getting Started***
+***💻 Getting Started -***
 
 To run this project locally on your machine, follow these steps:
 
